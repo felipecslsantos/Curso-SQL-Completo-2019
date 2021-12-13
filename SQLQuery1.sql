@@ -98,3 +98,182 @@ WHERE FirstName = 'Peter' AND LastName = 'Krebs';
 SELECT EmailAddress
 FROM Person.EmailAddress
 WHERE BusinessEntityID = 26;
+
+--COUNT
+
+SELECT count(DISTINCT Title)
+FROM Person.Person;
+
+/* DESAFIO 1
+
+Eu quero saber quantos produtos temos cadastrados
+em nossa tabela produtos (Production.Product)
+
+DESAFIO 2
+
+Eu que saber quantos tamanhos de produtos temos cadastrados em nossa tabela 
+
+*/
+
+SELECT COUNT(*)
+FROM Production.Product;
+
+SELECT COUNT(Size)
+FROM Production.Product;
+
+
+-- TOP
+
+SELECT TOP 10 *
+FROM Production.Product;
+
+-- ORDER BY
+
+SELECT *
+FROM Person.Person
+ORDER BY FirstName asc;
+
+SELECT *
+FROM Person.Person
+ORDER BY FirstName desc;
+
+SELECT *
+FROM Person.Person
+ORDER BY FirstName asc, LastName desc;
+
+SELECT FirstName, LastName
+FROM Person.Person
+ORDER BY FirstName asc, LastName desc;
+
+SELECT MiddleName
+FROM Person.Person
+ORDER BY MiddleName asc;
+
+ -- DESAFIO 1
+
+ /* 
+ Obter o product ID dos 10 produtos mais caros
+ cadastrados no sistema, listando do mais caro
+ para o mais barato.
+ */
+/*
+- dicas
+- Você tará que usar a tabela Production.Product
+- Você terá Order BY  e TOP
+- E para ordenar você terá que usar ORDER BY  asc ou desc dependendo do resultado que está buscnado
+*/
+
+ SELECT TOP 10 ProductID, ListPrice
+ FROM Production.Product
+ ORDER BY ListPrice desc;
+
+/* DESAFIO 2
+	Obter o nome e número dos produtos que tem o ProductID entre 1~4
+*/
+/*
+- dicas
+- Você tará que usar a tabela Production.Product
+- Você terá Order BY  e TOP
+- E para ordenar você terá que usar ORDER BY  asc ou desc dependendo do resultado que está buscnado
+*/
+
+SELECT TOP 4 Name, ProductNumber
+ FROM Production.Product
+ ORDER BY ProductID asc;
+
+ --BETWEEN
+
+ SELECT *
+ FROM Production.Product
+ WHERE ListPrice between 1000 AND 1500;
+
+ SELECT *
+ FROM Production.Product
+ WHERE ListPrice NOT between 1000 AND 1500;
+
+ SELECT *
+ FROM HumanResources.Employee
+ WHERE Hiredate between '2009/01/01' AND '2010/01/01'
+ ORDER BY Hiredate;
+
+ -- IN
+
+ SELECT *
+ FROM Person.Person
+ WHERE BusinessEntityID IN (2,7,13);
+
+ SELECT *
+ FROM Person.Person
+ WHERE BusinessEntityID NOT IN (2,7,13);
+
+ -- LIKE
+
+ SELECT *
+ FROM Person.Person
+ WHERE FirstName LIKE 'OVI%';
+
+ SELECT *
+ FROM Person.Person
+ WHERE FirstName LIKE '%TO';
+
+ SELECT *
+ FROM Person.Person
+ WHERE FirstName LIKE '%ESSA%';
+
+ SELECT *
+ FROM Person.Person
+ WHERE FirstName LIKE '%ro_';
+
+ /* DESAFIO FUNDAMENTOS
+
+ 1- Quantos produtos temos cadastrados no sistema  que custam mais de 1500,00 dólares?
+
+ 
+ */
+
+ SELECT COUNT(ListPrice)
+ FROM Production.Product
+ WHERE ListPrice > 1500;
+
+ /*
+ 2 - Quantas pessoas tem o nome que inicia com a letra ?
+ */
+ SELECT COUNT(LastName)
+ FROM Person.Person
+ WHERE LastName LIKE 'P%'
+
+ /*
+ 3 - Em quantas cidades únicas estão cadastrados nossos clientes
+ */
+
+ SELECT COUNT(DISTINCT(City))
+ FROM Person.Address;
+
+ /*
+ 4 - Quais as cidades únicas que temos cadastrados em nosso sistema?
+ */
+
+ SELECT DISTINCT(City)
+ FROM Person.Address;
+
+ /*
+
+ Quantos produtos vermelhos tem preço entre 500 e 100 dólares?
+
+ */
+
+ SELECT COUNT(*)
+ FROM Production.Product
+ WHERE Color = 'Red'
+ AND ListPrice BETWEEN '500' AND '1000';
+
+ /*
+
+ Quantos produtos cadastrados tem a palavra 'road' no nome deles?
+
+ */
+
+ SELECT COUNT(*)
+ FROM Production.Product
+ WHERE Name like '%road%';
+
