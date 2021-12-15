@@ -273,7 +273,44 @@ SELECT TOP 4 Name, ProductNumber
 
  */
 
+
+/* MIN, MAX, SUM E AVG*/
+
  SELECT COUNT(*)
  FROM Production.Product
  WHERE Name like '%road%';
+
+SELECT TOP 10 SUM(Linetotal) AS "Soma"
+FROM Sales.SalesOrderDetail;
+
+SELECT TOP 10 MIN(LineTotal)
+FROM Sales.SalesOrderDetail;
+
+SELECT TOP 10 MAX(LineTotal)
+FROM Sales.SalesOrderDetail;
+
+SELECT TOP 10 AVG(LineTotal)
+FROM Sales.SalesOrderDetail;
+
+-- GROUP BY + DESAFIOS
+-- O GROUP BY DIVIDE O RESULTADO DA SUA PESQUISA EM GRUPOS
+
+SELECT MiddleName, COUNT(FirstName) AS 'QUANTIDADE DE PESSOAS'
+FROM Person.Person
+GROUP BY(MiddleName);
+
+-- Eu preciso saber em média qual é a quantidade(quantity) que cada produto é vendido na loja.
+
+SELECT ProductID, AVG(OrderQty) AS MEDIA
+FROM Sales.SalesOrderDetail
+GROUP BY ProductID;
+
+/* Eu quero saber quais as 10 vendas que no total tiveram os maiores valores de vendass(line total) por
+produto do maior valor para o menor.*/
+
+SELECT TOP 10 ProductID, SUM(LineTotal)
+FROM Sales.SalesOrderDetail
+GROUP BY ProductID
+ORDER BY SUM(LineTotal) DESC;
+
 
