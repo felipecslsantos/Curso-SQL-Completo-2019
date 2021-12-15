@@ -313,4 +313,15 @@ FROM Sales.SalesOrderDetail
 GROUP BY ProductID
 ORDER BY SUM(LineTotal) DESC;
 
+/* Eu preciso saber qual e quantidade media
+de produtos temos cadastrados nas nossas ordem 
+de serviço (WorOrder), agrupadas por productID
+*/
+
+SELECT ProductID, COUNT(ProductID) AS "Quantidade", AVG(OrderQty) AS "Media"
+FROM Production.WorkOrder
+GROUP BY ProductID;
+
+
+
 
